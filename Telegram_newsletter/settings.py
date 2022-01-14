@@ -13,7 +13,7 @@ DEBUG = True
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
-# Application definition
+# APPS_DIR = os.path.join(BASE_DIR, '/apps')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,6 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'apps.client.apps.ClientConfig',
 ]
 
 MIDDLEWARE = [
