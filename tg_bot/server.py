@@ -6,6 +6,8 @@ from aiogram.utils import executor
 from create_bot import dp
 import handler
 
+
+
 """Логирование"""
 logging.basicConfig(level=logging.DEBUG)
 
@@ -18,6 +20,7 @@ async def set_commands(dispatcher: Dispatcher):
     await dispatcher.bot.set_my_commands([
         BotCommand(command="/start", description="Для запуска бота воспользуйтесь порталом"),
     ])
+
 
 
 # @dp.async_task

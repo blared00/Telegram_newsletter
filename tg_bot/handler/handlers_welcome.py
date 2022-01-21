@@ -7,6 +7,8 @@ from aiogram.utils.markdown import hspoiler
 from create_bot import dp
 
 
+
+
 @dp.message_handler(commands=["start"])
 async def start_messages(message: types.Message, state: FSMContext):
     """Handle /spoiler command and answer with spoiler."""
@@ -18,6 +20,7 @@ async def start_messages(message: types.Message, state: FSMContext):
         list_user.append(user['email'])
     text = '\n'.join(list_user)
     await message.answer(
-        f"Spoiler: {hspoiler(text)}",
+        f"Spoiler: {hspoiler('text')}",
         parse_mode=ParseMode.HTML)
+
 
