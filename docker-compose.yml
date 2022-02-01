@@ -1,6 +1,15 @@
 version: '3.8'
 
 services:
+#  nginx:
+#    build: ./nginx
+#    volumes:
+#      - ./nginx:/usr/src/app/nginx
+#    ports:
+#      - 1337:80
+#      - 1338:443
+#    depends_on:
+#      - web
   redis:
     image: redis
     ports:
@@ -20,7 +29,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     command:
-      - gunicorn Telegram_newsletter.wsgi:application -b 0.0.0.0:8000 --reload && python tg_bot/server.py
+      - python manage.py migrate && python manage.py collectstatic --noinput && gunicorn Telegram_newsletter.wsgi:application -b 0.0.0.0:8000 --reload
     volumes:
       - .:/usr/src/app
     depends_on:
@@ -37,3 +46,13 @@ services:
     depends_on:
       - web
       - redis
+  bot_app:
+    build:
+      context: ./tg_bot/
+      dockerfile: Dockerfile
+    volumes:
+      - ./tg_bot:/usr/src/app/tg_bot
+    depends_on:
+      - web
+      - redis
+      - celery
